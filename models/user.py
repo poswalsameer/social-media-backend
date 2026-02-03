@@ -1,6 +1,9 @@
-from sqlmodel import SQLModel, Field
-from typing import Optional
+from sqlmodel import SQLModel, Field, Relationship
+from typing import Optional, List, TYPE_CHECKING
 from datetime import datetime
+
+if TYPE_CHECKING:
+    from .post import Post
 
 
 class User(SQLModel, table=True):
@@ -13,3 +16,6 @@ class User(SQLModel, table=True):
     bio: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+    # Relationship of users with posts
+    post: List["Post"] = Relationship(back_populates="user")

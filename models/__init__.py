@@ -1,1 +1,4 @@
-from models.user import User
+from .user import User
+from .post import Post
+
+__all__ = ["User", "Post"]
